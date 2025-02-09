@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>???????????</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        * {
+            font-family: Outfit, sans-serif;
+        }
+        body {
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            background-image: linear-gradient(20deg, #ffb9f6 0%, #ebebeb 100%);
+        }
+        .cursiva{
+            font-family: 'Pacifico', cursive;
+        }
+
+        .hide {
+            animation: hide 2s ease-in-out forwards;
+        }
+
+        #contador {
+            font-size: 2em;
+            background: linear-gradient(270deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd0, #002bff, #7a00ff, #ff00c8);
+            background-size: 400% 400%;
+            color: white;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            animation: rainbow 8s infinite linear;
+        }
+
+        .counter-section {
+            display: grid;
+            place-content: center;
+            height: 100vh;
+        }
+
+        .celebracion{
+            position: relative;
+            width: 80%;
+            height: fit-content;
+            padding: 1rem 0 2rem 0;
+            margin: auto;
+            margin-top: 100px;
+            margin-bottom: 80px;
+            border-radius: 20px;
+            background-color: #fff;
+            z-index: 1;
+
+            &>h1{
+                font-size: 1.7rem;
+                z-index: 10;
+                
+            }
+            &>.emoji{
+                position: absolute;
+                right: -50px;
+                top: 30px;
+                font-size: 100px;
+                z-index: 1;
+                rotate: 15deg;
+                animation: shake 2s infinite;
+            }
+        }
+        
+        .carta{
+            width: 90%;
+            margin: auto;
+        }
+        /**Fotos en horizontal */
+        .photo_h{
+            aspect-ratio: 16/9;
+            border: 2px solid #fff; 
+            box-shadow: 0px 0px 10px #000;
+        }
+        /**Fotos en vertical */
+        .photo_v{
+            aspect-ratio: 9/16;
+            border: 2px solid #fff; 
+            box-shadow: 0px 0px 10px #000;
+        }
+
+
+        /// Seccion de animacion
+        @keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+        @keyframes hide {
+            0% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+        @keyframes shake{
+            0% { rotate: 15deg; }
+            25% { rotate: -10deg; }
+            50% { rotate: 10deg; }
+            75% { rotate: -10deg; }
+            100% { rotate: 15deg; }
+        }
+        
+    </style>
+</head>
+<body>
+    <section class="counter-section">
+        <h1>Cuenta Regresiva!</h1>
+        <div id="contador"></div>
+        <p>Solo sabremos lo que nos espera el 20 de febrero!!!</p>
+    </section>
+    <!-- la parte divertida -->
+
+     <section class="celebracion">
+        <p style="position: absolute; font-size: 4rem; top: -100px;">🎉</p>
+        <h1>Feliz Cumpleaños <br><span>Maria</span></h1>
+        <p>Espero que cumplas todos tus objetivos y que tengas un gran cumpleaños.</p>
+        <p class="emoji">🎂</p>
+     </section>
+
+     <section class="carta">
+        <p style="font-size: 1.2rem;text-align: left;"><span class="cursiva">Querida Maria,</span> Aqui va todo el testamento de la carta de la cual te deseo mucho el cumpleaños.</p>
+     </section>
+     <footer>
+        <p>Este sitio fue hecho con 💖</p>
+        <p>Con la participacion de tus amigos y familiares.</p>
+     </footer>
+</body>
+</html>
+    <script>
+
+        //cuenta regresiva
+		let contador = document.getElementById("contador")as HTMLDivElement;
+        function iniciarContador(fechaObjetivo: number) {
+            function actualizarContador() {
+                const ahora = new Date().getTime();
+                const tiempoRestante = fechaObjetivo - ahora;
+
+                if (tiempoRestante <= 0) {
+                    contador.innerHTML = "Es Hora!!!!!";
+                    clearInterval(intervalo);
+                    return;
+                }
+
+                const dias = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+                const horas = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+
+                contador.innerHTML = 
+                    `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+            }
+
+            const intervalo = setInterval(actualizarContador, 1000);
+            actualizarContador(); 
+        }
+
+        // Configurar la fecha objetivo (año, mes-1, día, hora, minuto, segundo)
+        const fechaObjetivo = new Date(2025, 1, 20, 0, 0, 0).getTime();
+        iniciarContador(fechaObjetivo);
+    </script>
