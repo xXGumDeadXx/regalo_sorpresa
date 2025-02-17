@@ -1,3 +1,7 @@
+---
+import Footer from "../components/footer.astro"
+import Gallery from "../components/gallery.astro"
+---
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,22 +13,54 @@
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
         * {
             font-family: Outfit, sans-serif;
+            text-wrap: pretty;
         }
         body {
             text-align: center;
             background-color: #f4f4f4;
             margin: 0;
-            background-image: linear-gradient(20deg, #ffb9f6 0%, #ebebeb 100%);
+            background-image: linear-gradient(20deg, #ffb9f6 0%, #f17168 20%, #d9d5fd 75%);
+        }
+        p{
+            font-size: 1.2rem;
+        }
+        img{
+            border: 4px solid #fff; 
+            box-shadow: 0px 0px 10px #000;
         }
         .cursiva{
             font-family: 'Pacifico', cursive;
         }
-
+        /**Para js */
         .hide {
             animation: hide 2s ease-in-out forwards;
         }
         .hide-section{
             display: none;
+        }
+
+        .valid_movile{
+            display: none;
+        }
+        .showw{
+            display: block;
+            display: flex;
+            position: fixed;
+            background-color: #fff;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .dark_mode{
+            background-color: #0000005d;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            z-index: 20;
         }
 
         #contador {
@@ -37,7 +73,10 @@
             border-radius: 10px;
             animation: rainbow 8s infinite linear;
         }
-
+        #celebrate{
+            overflow-x: hidden;
+            animation: show 3s ease-in-out forwards;
+        }
         .counter-section {
             display: grid;
             place-content: center;
@@ -71,22 +110,17 @@
                 animation: shake 2s infinite;
             }
         }
-        
+        .final{
+            font-size: 1.2rem;
+            width: 90%;
+            margin-inline: auto;
+            margin-top: 60px;
+            font-weight: bold;
+        }
         .carta{
             width: 90%;
             margin: auto;
-        }
-        /**Fotos en horizontal */
-        .photo_h{
-            aspect-ratio: 16/9;
-            border: 2px solid #fff; 
-            box-shadow: 0px 0px 10px #000;
-        }
-        /**Fotos en vertical */
-        .photo_v{
-            aspect-ratio: 9/16;
-            border: 2px solid #fff; 
-            box-shadow: 0px 0px 10px #000;
+            position: relative;
         }
 
 
@@ -108,38 +142,82 @@
             75% { rotate: -10deg; }
             100% { rotate: 15deg; }
         }
+        @keyframes caer {
+            0% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(-10deg);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+        }
+        @keyframes -caer {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(10deg);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+        }
+        @keyframes show{
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
         
     </style>
 </head>
 <body>
-    <section class="counter-section">
+    <div class="valid_movile">
+        <h1>Lastimosamente, esta pagina web solo esta disponible en dispositivos móviles</h1>
+    </div>
+    <!-- <section class="counter-section">
         <h1>Cuenta Regresiva!</h1>
         <div id="contador"></div>
-        <p>Solo sabremos lo que nos espera el 20 de febrero!!!</p>
-    </section>
+        <p>Solo sabremos lo que nos espera el 20 de febrero 7am!!!</p>
+    </section> -->
     <!-- la parte divertida -->
-    <div class="hide-section">
-
+    <div id="celebrate" class=""> <!-- class="hide-section" despues de terminar la pagina-->
+        
         <section class="celebracion">
-           <p style="position: absolute; font-size: 4rem; top: -100px;">🎉</p>
-           <h1>Feliz Cumpleaños <br><span>Maria</span></h1>
-           <p>Espero que cumplas todos tus objetivos y que tengas un gran cumpleaños.</p>
-           <p class="emoji">🎂</p>
+            <p style="position: absolute; font-size: 4rem; top: -100px;">🎉</p>
+            <img src="maria/maria.jpg" alt="Foto de maria" style="position:absolute;width: 150px;top: -80px;right: -10px; rotate:6deg">
+            <h1>Feliz Cumpleaños <br><span>Maria Victoria</span></h1>
+            <p>Espero que cumplas todos tus objetivos y que tengas un gran cumpleaños.</p>
+            <p class="emoji">🎂</p>
         </section>
    
         <section class="carta">
-           <p style="font-size: 1.2rem;text-align: left;"><span class="cursiva">Querida Maria,</span> Aqui va todo el testamento de la carta de la cual te deseo mucho el cumpleaños.</p>
+            <img src="main.jpg" alt="hb" style="transform: translateY(-150vh);width: 170px; float: right; rotate: 6deg; animation: caer 1.5s ease-out forwards; animation-delay: 2s;margin-left: 10px;">
+            <p style="font-size: 1.2rem;text-align: left;"><span class="cursiva">Querida Maria,</span> Hoy es un día especial, un día en el que el tiempo se detiene por un instante para recordarnos lo hermoso que es vivir, reír y compartir. Un cumpleaños no es solo el paso de los años, sino la celebración de cada sonrisa, cada sueño alcanzado y cada momento que ha llenado el corazón de alegría.<br><br>Que este nuevo ciclo que comienza esté lleno de luz, de amor sincero y de infinitas oportunidades. Que las velas encendidas no solo representen el tiempo transcurrido, sino también las esperanzas y deseos que aún están por cumplirse.<br><br>Rodeado de aquellos que más te quieren, hoy es un día para brindar por lo vivido y por lo que está por venir. Porque la felicidad no se mide en años, sino en instantes inolvidables.</p>
         </section>
-        <footer>
-           <p>Este sitio fue hecho con 💖</p>
-           <p>Con la participacion de tus amigos y familiares.</p>
-        </footer>
+        <section style="width:90%;margin:auto;">
+            
+            <h1>Feliz Cumpleaños, <br><span>De tus amigas.</span></h1>
+            <img src="hb.jpg" alt="bts" style="transform: translateY(-200vh);width: 150px; float: left; rotate: -6deg; animation: -caer 1.5s ease-out forwards; animation-delay: 2s; margin-right: 15px; margin-bottom: 20px;">
+            <p style="text-align: left;">Hoy no es un día cualquiera, ¡es el día en que celebramos la vida de alguien increíble! 🥳 Desde el primer momento en que nos conocimos, supimos que la diversión, las risas y las mejores historias estaban aseguradas contigo. <blockquote style="font-weight: bold; font-size: 1.3rem">Cada recuerdo compartido es un tesoro y cada aventura a tu lado es una prueba de que la amistad verdadera hace la vida más especial.</blockquote> </p>
+        </section>
+        <Gallery />
+        <p class="final">¡Hoy celebramos a alguien único! 🎂 Gracias por ser esa persona que siempre alegra el día con su buena vibra, sus ocurrencias y su gran corazón. Eres alguien que deja huella en cada momento y estamos felices de compartir este día contigo.</p>
+        <Footer />
     </div>
 </body>
 </html>
     <script>
+        const valid_mobile = document?.querySelector(".valid_movile") as HTMLDivElement;
 
-        //cuenta regresiva
+         if(window.innerWidth > 700){
+            valid_mobile.classList.add("showw");
+         }
+        // cuenta regresiva
 		let contador = document.getElementById("contador")as HTMLDivElement;
         function iniciarContador(fechaObjetivo: number) {
             function actualizarContador() {
@@ -148,6 +226,11 @@
 
                 if (tiempoRestante <= 0) {
                     contador.innerHTML = "Es Hora!!!!!";
+                    document.querySelector(".counter-section").classList.add("hide") ;
+                    setTimeout(() => {
+                        document.querySelector("#celebrate").classList.remove("hide-section");
+
+                    }, 1000);
                     clearInterval(intervalo);
                     return;
                 }
@@ -166,6 +249,8 @@
         }
 
         // Configurar la fecha objetivo (año, mes-1, día, hora, minuto, segundo)
-        const fechaObjetivo = new Date(2025, 1, 20, 0, 0, 0).getTime();
+        const fechaObjetivo = new Date(2025, 1, 20, 7, 0, 0).getTime();
         iniciarContador(fechaObjetivo);
+
+
     </script>
